@@ -1,65 +1,39 @@
 # Claude Code Utils
 
-A collection of Claude Code utilities, scripts, and examples for effective AI collaboration.
+A collection of utilities and scripts for getting the most out of [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
-## Overview
+## What's Here
 
-This repository contains helpful files and scripts for working with Claude Code, focused on maintaining synchronized documentation and workflow utilities.
+### Statusline (`statusline/`)
+
+A custom statusline script that shows git context and session info at a glance.
+
+```
+[project] main (3Δ) | Opus 4.6 | 88%
+```
+
+See [`statusline/README.md`](statusline/README.md) for setup.
+
+### Notion MCP Setup (`mcp/notion/`)
+
+Step-by-step guide for connecting Claude Code to your Notion workspace via the Model Context Protocol.
+
+See [`mcp/notion/README.md`](mcp/notion/README.md) for the full setup guide.
+
+### Scripts (`scripts/`)
+
+- **`granola-export.sh`** — Exports Granola meeting transcripts for use in Obsidian.
 
 ## Repository Structure
 
 ```
-/claude-configs/
-  - main-claude.md (Ken's live config)
-  /obsidian-examples/
-    - example-obsidian-claude.md
-/scripts/
-  - sync-claude-utils.sh
-README.md
+agent-utils/
+├── statusline/          # Custom statusline for Claude Code
+├── mcp/
+│   └── notion/          # Notion MCP setup guide
+└── scripts/             # Automation scripts
 ```
-
-## Key Files
-
-### `claude-configs/main-claude.md`
-Ken's live CLAUDE.md configuration file, synced from his Obsidian vault. This is his actual working configuration that Claude uses for all interactions. **This file is automatically synchronized - do not edit directly.**
-
-### `claude-configs/obsidian-examples/example-obsidian-claude.md`  
-A generalized example of a CLAUDE.md configuration suitable for Obsidian-based workflows. Use this as a starting point for your own setup.
-
-### `scripts/sync-claude-utils.sh`
-Automated sync script that:
-- Copies Ken's live CLAUDE.md from his Obsidian vault (`/Users/ken/Desktop/notes/shoshin-codex/CLAUDE.md`)
-- Saves it as `claude-configs/main-claude.md` in this repository
-- Commits changes with timestamp
-- Pushes updates to GitHub
-
-## Workflow
-
-Ken works primarily from his Obsidian vault (`/Users/ken/Desktop/notes/shoshin-codex/`) where his live `CLAUDE.md` file resides. This allows Claude to easily access his notes, tasks, and project documentation during conversations.
-
-The sync script ensures this public repository always has his current configuration for reference and collaboration.
-
-## Usage
-
-### Running the Sync Script
-```bash
-./scripts/sync-claude-utils.sh
-```
-
-### Setting Up Your Own Configuration
-1. Copy `claude-configs/obsidian-examples/example-obsidian-claude.md` as a starting point
-2. Customize it for your specific workflow and directory structure
-3. Place it as `CLAUDE.md` in your working directory
-4. Reference it during Claude Code sessions
-
-## Repository Vision
-
-This will grow to include:
-- Static versions of CLAUDE.md for different use cases
-- Workflow templates and configurations
-- Helpful scripts for Claude Code collaboration
-- Example setups for various development environments
 
 ## Contributing
 
-Feel free to contribute useful Claude Code utilities, templates, or improvements to existing scripts. Focus on tools that enhance AI-human collaboration workflows.
+Contributions welcome — utilities, scripts, or improvements to existing content. Focus on things that help people work more effectively with Claude Code.
