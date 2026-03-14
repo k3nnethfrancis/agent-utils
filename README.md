@@ -33,8 +33,7 @@ Claude Code skills (SKILL.md format) — drop into your `.claude/skills/` direct
 **Research:**
 - **`lit-review`** — Structured paper review with cybernetic analysis rubric, templates, and examples
 - **`research-note-writing`** — Guidelines for substantive research notes (analysis, not inventory)
-- **`research-log-writing`** — Published research log style (plain documentation, not performance)
-- **`research-log`** — Durable experiment logging with quality bar for writeup-ready entries
+- **`research-log`** — Experiment logging + published research logs in one skill, with quality bar
 
 ### memory/
 

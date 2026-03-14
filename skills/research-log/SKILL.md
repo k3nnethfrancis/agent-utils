@@ -1,11 +1,11 @@
 ---
 name: research-log
-description: Write and maintain durable research-log.md files after experiments, evaluations, and research sessions. Captures hypotheses, setup, artifacts, results, interpretations, and next steps in a form that supports later technical reports.
+description: Write and maintain research logs — durable records of experiments, sessions, and findings. Covers both internal experiment logs (what we ran, what happened) and published research logs (what we explored, what we learned). Use after experiments, evaluations, research sessions, or when synthesizing a day's work.
 ---
 
 # Research Log
 
-Use this skill to turn experiment work into durable, writeup-ready notes.
+Turn experiment work and research sessions into durable, writeup-ready notes.
 
 The goal is not to duplicate raw logs. The goal is to preserve the reasoning thread that will matter later when writing a report:
 - what question the run was meant to answer
@@ -14,7 +14,17 @@ The goal is not to duplicate raw logs. The goal is to preserve the reasoning thr
 - what that means
 - what should happen next
 
-## Workflow
+## Two Modes
+
+### Internal Experiment Log
+
+For `research-log.md` files within projects — structured records of specific experiments and runs.
+
+### Published Research Log
+
+For dated logs that synthesize across a day's work — what was explored, read, built, and learned.
+
+## Workflow (Internal)
 
 ### 1. Read the Existing Context
 
@@ -86,4 +96,58 @@ After updating the research log, also update surrounding project context when ap
 - ledger for implementation progress
 - handoff docs for next-session assumptions
 
-The research log is the writeup-friendly layer, not the only layer.
+## Published Log Format
+
+```yaml
+---
+title: YYYY-MM-DD
+date: YYYY-MM-DD
+tags:
+  - relevant-tags
+  - research-log
+---
+# YYYY-MM-DD | Descriptive title
+
+Content here.
+```
+
+### Structure
+
+When a day has multiple distinct activities, organize by what happened:
+
+1. **What we explored / built / reviewed** — Plain description of the work and approach
+2. **What we read / processed** — Papers, threads with links
+3. **What we're thinking about** — Synthesis, open questions, connections between pieces
+
+Each section should stand alone.
+
+### Style
+
+**Plain documentation, not performance.** No hyperbole, no catchy framing, no "key insights" callouts.
+
+**Notebook, not manifesto.** Observations, questions, findings. Not announcements about what you're going to do.
+
+**Show, don't tell.** Lead by example rather than declaring intent.
+
+**Include links.** Papers, threads, repos, tools — link them.
+
+**Capture the full day's work.** Reflect the full scope, not just the current session.
+
+### Good headers
+
+- "Exploring X and Y"
+- "Bookmark review"
+- "Thoughts on multi-agent research tools"
+
+### Bad headers
+
+- "The Core Insight"
+- "What This Means for the Arc"
+- "Key Takeaways"
+
+### Tone
+
+- First person plural ("we") for collaborative work
+- Plain English, direct observations
+- Questions are good
+- Uncertainty is fine — don't oversell conclusions
