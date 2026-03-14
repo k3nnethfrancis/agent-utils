@@ -97,6 +97,17 @@ Then in `~/.claude/settings.json`:
 }
 ```
 
+## Reference Projects
+
+Included as git submodules under `reference/`:
+
+- **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)** — Skills and context engineering patterns for Claude Code
+- **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)** — Comprehensive collection of Claude Code resources, tips, and configurations
+
+```bash
+git submodule update --init --recursive  # pull after cloning
+```
+
 ## Philosophy
 
 - **Built from use, not theory** — everything here came from solving actual workflow problems

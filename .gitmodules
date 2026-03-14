@@ -1,0 +1,6 @@
+[submodule "reference/agent-skills-context-engineering"]
+	path = reference/agent-skills-context-engineering
+	url = https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git
+[submodule "reference/everything-claude-code"]
+	path = reference/everything-claude-code
+	url = https://github.com/affaan-m/everything-claude-code.git
