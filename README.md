@@ -1,6 +1,8 @@
 # agent-utils
 
-Hooks, skills, configs, and scripts for working with Claude Code. Built through daily use — everything here solves a real problem.
+Hooks, skills, configs, and MCP guides for working with Claude Code. Built through daily use — everything here solves a real problem.
+
+**New here?** Read **[WORKFLOW.md](WORKFLOW.md)** for how all the pieces fit together — the vault structure, memory layer, research flow, and why Obsidian.
 
 ## What's Here
 
@@ -16,6 +18,10 @@ These two hooks together give Claude Code persistent memory across compactions: 
 ### skills/
 
 Claude Code skills (SKILL.md format) — drop into your `.claude/skills/` directory.
+
+**Planning & Strategy:**
+- **`daily-planning`** — Pull context from all sources (tasks, notes, meetings, projects) to plan the day or week
+- **`strategize`** — Strategic thinking mode for direction, trade-offs, and priorities across projects
 
 **Workflow:**
 - **`plan-interview`** — Stress-test a plan through structured one-question-at-a-time interrogation
