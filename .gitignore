@@ -1,1 +1,4 @@
 .DS_Store
+*.local
+*.local.*
+config.local.sh
