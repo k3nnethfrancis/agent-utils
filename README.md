@@ -1,68 +1,25 @@
 # agent-utils
 
-Hooks, skills, configs, and MCP guides for working with Claude Code. Built through daily use — everything here solves a real problem.
+My Claude Code setup — hooks, skills, configs, and MCP integrations. Everything here is what I actually run daily.
 
-Point your agent at this repo and tell it to copy the setup. Pick what you need, ignore the rest.
+## Quick Setup
 
-## What's Here
-
-### hooks/
-
-Shell scripts that plug into Claude Code's hook system for automated workflows.
-
-- **`pre-compact-dump.sh`** — Saves conversation history to markdown before context compaction. Enables session persistence across compactions. Set `SESSIONS_DIR` to control where dumps land.
-- **`session-context-inject.sh`** — After compaction, searches your notes vault (via [QMD](https://github.com/tobilu/qmd)) and re-injects relevant context. Requires QMD indexing a markdown vault.
-
-These two hooks together give Claude Code persistent memory across compactions: dump the conversation, then pull relevant vault context back in when the session resumes.
-
-### skills/
-
-Claude Code skills (SKILL.md format) — drop into your `.claude/skills/` directory.
-
-**Planning & Strategy:**
-- **`daily-planning`** — Pull context from all sources (tasks, notes, meetings, projects) to plan the day or week
-- **`strategize`** — Strategic thinking mode for direction, trade-offs, and priorities across projects
-
-**Workflow:**
-- **`harness-engineering`** — Design agent environments using cybernetic control theory (Ashby, Beer, Bateson) + OpenAI's harness engineering principles. Diagnostic framework for when agents produce bad output.
-- **`plan-interview`** — Stress-test a plan through structured one-question-at-a-time interrogation
-- **`project-kickoff`** — Consistent project scaffolding with agent-efficient structure
-- **`git-tracking`** — Smart commit bundling (think PR-sized, not edit-sized)
-- **`work-logging`** — Timestamped daily note logging
-- **`oss-prep`** — Scan, discuss, and transform a project for open source release
-
-**Research:**
-- **`lit-review`** — Structured paper review with cybernetic analysis rubric, templates, and examples
-- **`research-note-writing`** — Guidelines for substantive research notes (analysis, not inventory)
-- **`research-log`** — Experiment logging + published research logs in one skill, with quality bar
-
-### memory/
-
-- **`qmd/`** — Local markdown vault search via [QMD](https://github.com/tobilu/qmd). BM25 keyword search, semantic vector search, and hybrid query+rerank — all local on Metal GPU. Powers the session-context-inject hook and serves as an MCP server for in-session vault queries.
-
-### mcps/
-
-Setup guides for MCP servers that connect Claude to external services. Each README is agent-actionable — contains the exact install command, what the user needs to provide (API keys, OAuth), and how to verify.
-
-- **`notion/`** — Notion workspace access
-- **`linear/`** — Linear issue tracking
-- **`granola/`** — Meeting notes via Granola's official MCP server
-
-### configs/
-
-- **`statusline.sh`** — Custom statusline showing `[dir] branch (NΔ) | Model | effective_%` where the percentage reflects usable context remaining (adjusted for auto-compact threshold)
-
-## Setup
-
-### Hooks
+Clone and install everything:
 
 ```bash
-# Copy hooks to Claude Code hooks directory
+git clone https://github.com/k3nnethfrancis/agent-utils.git
+cd agent-utils
+```
+
+### 1. Hooks (persistent memory across compactions)
+
+```bash
 cp hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 ```
 
-Configure in your Claude Code settings or `hooks.json`:
+Add to `~/.claude/settings.json` under `"hooks"`:
+
 ```json
 {
   "hooks": {
@@ -72,45 +29,96 @@ Configure in your Claude Code settings or `hooks.json`:
 }
 ```
 
-Set `SESSIONS_DIR` environment variable to your preferred dump location (defaults to `~/sessions`).
+Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions`). Works best pointed at an Obsidian vault — e.g. `export SESSIONS_DIR=~/notes/vault/sessions`.
 
-### Skills
+**What this does**: Before context compaction, dumps the full conversation to markdown. After compaction, searches your vault via [QMD](https://github.com/tobilu/qmd) and re-injects relevant context. Claude doesn't lose track of what you were working on.
 
-Copy skill directories into your project or user-level `.claude/skills/`:
+### 2. Skills
 
 ```bash
+# All skills (user-level)
 cp -r skills/* ~/.claude/skills/
-# or for project-level
-cp -r skills/* .claude/skills/
+
+# Or cherry-pick into a project
+cp -r skills/harness-engineering .claude/skills/
 ```
 
-### Statusline
+| Skill | What it does |
+|-------|-------------|
+| `daily-planning` | Plan the day/week from tasks, notes, meetings, project state |
+| `strategize` | Think through direction, trade-offs, priorities across projects |
+| `harness-engineering` | Design agent environments using cybernetics + OpenAI's harness principles |
+| `plan-interview` | Stress-test a plan through structured questioning |
+| `project-kickoff` | Consistent project scaffolding |
+| `git-tracking` | Smart commit bundling (PR-sized, not edit-sized) |
+| `work-logging` | Timestamped daily note logging |
+| `oss-prep` | Prepare a project for open source release |
+| `lit-review` | Structured paper review with cybernetic analysis rubric |
+| `research-note-writing` | Guidelines for substantive research notes |
+| `research-log` | Experiment logging + published research logs |
+
+### 3. Memory (QMD)
+
+Local vault search — BM25, semantic vectors, and hybrid rerank. All local, no API calls. Powers the session-context-inject hook and runs as an MCP server for in-conversation vault queries.
+
+```bash
+bun install -g @tobilu/qmd
+qmd index ~/path/to/your/vault
+```
+
+Register as MCP server:
+
+```bash
+claude mcp add qmd -- qmd mcp
+```
+
+See `memory/README.md` for full setup including auto-indexing via git hooks.
+
+### 4. MCP Integrations
+
+Setup guides in `mcps/` — each README has the exact install command and what keys/auth the user needs to provide.
+
+| Service | Install |
+|---------|---------|
+| Notion | `claude mcp add notion -- npx -y @notionhq/notion-mcp-server` |
+| Linear | `claude mcp add linear -- npx -y @linear/linear-mcp` |
+| Granola | `claude mcp add granola --transport http https://mcp.granola.ai/mcp` |
+
+Read each `mcps/*/README.md` for auth setup details.
+
+### 5. Statusline
 
 ```bash
 cp configs/statusline.sh ~/.claude/configs/statusline.sh
 ```
 
-Then in `~/.claude/settings.json`:
+Add to `~/.claude/settings.json`:
+
 ```json
 {
   "statusline": { "command": "~/.claude/configs/statusline.sh" }
 }
 ```
 
+Shows: `[dir] branch (NΔ) | Model | 73%` — the percentage is effective context remaining.
+
+## How It Fits Together
+
+The core loop: **notes vault + QMD + hooks = persistent memory**.
+
+You keep a markdown vault (Obsidian recommended) with notes, daily logs, project docs, research. QMD indexes it locally. The hooks dump conversations before compaction and pull relevant vault context back in after. Your agent accumulates knowledge over time instead of starting fresh every session.
+
+The skills layer on top — `daily-planning` pulls from your vault + connected MCPs to plan the day. `lit-review` writes structured reviews into the vault. `research-log` captures experiment results. Everything feeds back into the searchable vault.
+
+The MCPs connect external sources — meeting notes from Granola, tasks from Linear, docs from Notion. More sources = richer context for planning and research skills.
+
 ## Reference Projects
 
 Included as git submodules under `reference/`:
 
-- **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)** — Skills and context engineering patterns for Claude Code
-- **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)** — Comprehensive collection of Claude Code resources, tips, and configurations
+- **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)**
+- **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)**
 
 ```bash
-git submodule update --init --recursive  # pull after cloning
+git submodule update --init --recursive
 ```
-
-## Philosophy
-
-- **Built from use, not theory** — everything here came from solving actual workflow problems
-- **Shell scripts over complexity** — hooks are bash, skills are markdown, configs are plain text
-- **Composable** — pick what you need, ignore the rest
-- **No personal data** — paths use env vars or `$HOME`, no hardcoded user directories
