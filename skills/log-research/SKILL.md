@@ -1,5 +1,5 @@
 ---
-name: research-log
+name: log-research
 description: Write and maintain research logs — durable records of experiments, sessions, and findings. Covers both internal experiment logs (what we ran, what happened) and published research logs (what we explored, what we learned). Use after experiments, evaluations, research sessions, or when synthesizing a day's work.
 ---
 

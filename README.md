@@ -29,7 +29,7 @@ Add to `~/.claude/settings.json` under `"hooks"`:
 }
 ```
 
-Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions`). Works best pointed at an Obsidian vault — e.g. `export SESSIONS_DIR=~/notes/vault/sessions`.
+Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions`). Works best pointed at a markdown vault — e.g. `export SESSIONS_DIR=~/notes/vault/sessions`. [Obsidian](https://obsidian.md) recommended but any markdown directory works.
 
 **What this does**: Before context compaction, dumps the full conversation to markdown. After compaction, searches your vault via [QMD](https://github.com/tobilu/qmd) and re-injects relevant context. Claude doesn't lose track of what you were working on.
 
@@ -43,19 +43,30 @@ cp -r skills/* ~/.claude/skills/
 cp -r skills/harness-engineering .claude/skills/
 ```
 
+**Knowledge Management:**
+
 | Skill | What it does |
 |-------|-------------|
-| `daily-planning` | Plan the day/week from tasks, notes, meetings, project state |
-| `strategize` | Think through direction, trade-offs, priorities across projects |
-| `harness-engineering` | Design agent environments using cybernetics + OpenAI's harness principles |
-| `plan-interview` | Stress-test a plan through structured questioning |
-| `project-kickoff` | Consistent project scaffolding |
-| `git-tracking` | Smart commit bundling (PR-sized, not edit-sized) |
-| `work-logging` | Timestamped daily note logging |
-| `oss-prep` | Prepare a project for open source release |
+| `strategize` | Orient, plan day/week, think through direction, stress-test plans — pulls from all available context |
+| `vault-tracking` | Commit your notes to git when substantial work accumulates |
+| `log-work` | Timestamped entries in daily notes |
+
+**Research:**
+
+| Skill | What it does |
+|-------|-------------|
 | `lit-review` | Structured paper review with cybernetic analysis rubric |
-| `research-note-writing` | Guidelines for substantive research notes |
-| `research-log` | Experiment logging + published research logs |
+| `log-research` | Experiment logging + published research logs |
+| `write-research` | Guidelines for substantive research notes |
+| `autoresearch` | Turn any research question into an automated experiment loop on small models |
+
+**Engineering:**
+
+| Skill | What it does |
+|-------|-------------|
+| `harness-engineering` | Design agent environments using cybernetics + OpenAI's harness principles |
+| `project-kickoff` | Consistent project scaffolding with plan.md, resources, architecture docs |
+| `oss-prep` | Prepare a project for open source release |
 
 ### 3. Memory (QMD)
 
@@ -104,11 +115,11 @@ Shows: `[dir] branch (NΔ) | Model | 73%` — the percentage is effective contex
 
 ## How It Fits Together
 
-The core loop: **notes vault + QMD + hooks = persistent memory**.
+The core loop: **markdown vault + QMD + hooks = persistent memory**.
 
 You keep a markdown vault (Obsidian recommended) with notes, daily logs, project docs, research. QMD indexes it locally. The hooks dump conversations before compaction and pull relevant vault context back in after. Your agent accumulates knowledge over time instead of starting fresh every session.
 
-The skills layer on top — `daily-planning` pulls from your vault + connected MCPs to plan the day. `lit-review` writes structured reviews into the vault. `research-log` captures experiment results. Everything feeds back into the searchable vault.
+The skills layer on top — `strategize` pulls from your vault + connected MCPs to plan the day. `lit-review` writes structured reviews into the vault. `log-research` captures experiment results. Everything feeds back into the searchable vault.
 
 The MCPs connect external sources — meeting notes from Granola, tasks from Linear, docs from Notion. More sources = richer context for planning and research skills.
 

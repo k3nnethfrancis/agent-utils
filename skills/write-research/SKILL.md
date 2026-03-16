@@ -1,5 +1,5 @@
 ---
-name: research-note-writing
+name: write-research
 description: Write substantive research notes — comprehensive reference documents that teach something meaningful about a topic.
 ---
 

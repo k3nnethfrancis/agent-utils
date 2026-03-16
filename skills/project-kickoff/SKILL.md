@@ -1,11 +1,11 @@
 ---
 name: project-kickoff
-description: Create a new project with consistent structure and documentation. Use when the user says "new project" or "start a project" or when building something new.
+description: Create a new project with consistent structure and documentation. Use when the user says "new project" or "start a project" or when building something new. Sets up for agent-assisted development from day one.
 ---
 
 # Project Kickoff
 
-Create a new project with consistent structure, smart dependency choices, and agent-efficient documentation.
+Create a new project with consistent structure, smart dependency choices, and agent-efficient documentation. The goal is a project that's ready for agent-assisted development from the first commit.
 
 ## When to Use
 
@@ -23,64 +23,97 @@ When the user says "new project" or "start a project" or you agree to build some
 Before writing code, decide:
 
 **Language selection based on agent proficiency:**
-- **TypeScript** - web apps, APIs
-- **Go** - CLI tools (agents excel at Go's simple type system)
-- **Swift** - macOS/iOS native UI
-- **Python** - ML, data processing, scripts
+- **TypeScript** — web apps, APIs, tooling
+- **Go** — CLI tools (agents excel at Go's simple type system)
+- **Swift** — macOS/iOS native UI
+- **Python** — ML, data processing, scripts, research
 
 **Dependency selection:**
-- Prioritize packages with strong community adoption (more training data for agents)
+- Prioritize packages with strong community adoption (more training data = better agent output)
 - Verify maintenance status, peer dependencies, popularity before adding
-- Popular frameworks = models have better contextual knowledge
+- Boring technology wins — agents know React better than your custom framework
 
 ## Step 2: Create Project Structure
 
 ```
 projects/{project-name}/
-├── CLAUDE.md           # Project-specific instructions
-├── README.md           # Status checklist, quick start
+├── CLAUDE.md              # Project-specific agent instructions
+├── README.md              # Status, quick start, what this is
 ├── docs/
-│   └── resources.md    # Links and references
-├── scripts/            # Processing/build scripts
-└── outputs/            # Generated artifacts
+│   ├── plan.md            # Implementation plan — goals, phases, decisions
+│   ├── resources.md       # Links, references, data sources
+│   └── architecture.md    # System design (when needed)
+├── research-log.md        # Experiment tracking (when applicable)
+└── src/                   # Source code
 ```
 
-Add as needed: `data/`, `src/`, `tests/`
+Add as needed: `scripts/`, `tests/`, `data/`, `outputs/`, `configs/`
 
-**Key principle:** Design for agent efficiency, not human navigation. Markdown-driven - models work efficiently with this format.
+### What Each File Does
+
+**`CLAUDE.md`** — The agent's entry point. Quick context, language/framework choices, key files, related paths. This is the map, not the encyclopedia.
+
+**`docs/plan.md`** — The implementation plan. What we're building, why, in what order. Decisions made and their rationale. Updated as the plan evolves — this is a living document, not a spec that gets written once.
+
+**`docs/resources.md`** — All reference links (papers, tools, APIs, related projects). Everything an agent needs to find context without asking.
+
+**`docs/architecture.md`** — System design, module boundaries, data flow. Create this when the project has enough moving parts to need one. Not every project does.
+
+**`research-log.md`** — Chronological log of experiments, findings, and decisions. What was tried, what happened, what it means, what's next. Critical for research projects; optional for pure engineering.
+
+**`README.md`** — Status checklist, quick start commands, what this project is. The human-facing overview.
 
 ## Step 3: Write CLAUDE.md
 
 Include:
-- Quick context (1-2 sentences)
+- Quick context (1-2 sentences: what this is and why it exists)
 - Language/framework choices and why
-- Key files list
+- Key files list with one-line descriptions
 - Related paths and connected projects
+- Any project-specific conventions or constraints
 
-## Step 4: Write README.md
+Structure as a map with pointers to `docs/` for detail. Keep under 100 lines.
+
+## Step 4: Write docs/plan.md
 
 Include:
-- Status checklist (what's done, what's next)
-- Quick start commands (CLI first - validate core logic before UI)
-- Link to docs/resources.md
+- **Goal** — what success looks like
+- **Approach** — how we're getting there
+- **Phases** — ordered steps with clear boundaries
+- **Decisions** — choices made and why (these are the most valuable part)
+- **Open questions** — what we don't know yet
+
+This is the document that gets updated most. When the plan changes, update it here — don't let the plan drift from the docs.
 
 ## Step 5: Write docs/resources.md
 
 Include:
-- All reference links (methodology, papers, tools)
+- All reference links (methodology, papers, tools, APIs)
 - Data sources (if applicable)
 - Related project paths
+- Anything an agent would need to look up
+
+## Step 6: Write README.md
+
+Include:
+- One-line description
+- Status checklist (what's done, what's next)
+- Quick start commands
+- Link to docs/ for detail
 
 ## Principles
 
-- **CLI first** - validate core logic before adding UI/extensions
-- **Agent-efficient structure** - organize for model navigation
-- **Markdown-driven** - docs as primary communication
-- **Iterative exploration** - build, play, refine
+- **CLI first** — validate core logic before adding UI/extensions
+- **Agent-efficient structure** — organize for model navigation, not human browsing
+- **Map, not encyclopedia** — CLAUDE.md points to docs/, docs/ points to code
+- **Boring technology** — popular frameworks = better agent output
+- **Plan is living** — update docs/plan.md as decisions are made, not after
+- **Iterative** — build the simplest version first, expand from working state
 
 ## Output
 
 Return to conversation with:
 - Paths created
 - Language/dependency decisions made
+- Plan outline (from docs/plan.md)
 - Status: ready to start work

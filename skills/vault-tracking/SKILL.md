@@ -1,11 +1,11 @@
 ---
-name: git-tracking
-description: Commit changes to git when substantial. Use proactively after completing significant work, structural changes, or before switching tasks. Think like merging a PR - meaningful bundles.
+name: vault-tracking
+description: Commit notes and vault changes to git when substantial. Use proactively after significant work in a markdown vault (Obsidian or any markdown directory) — structural changes, new notes, reorganization. Think like merging a PR - meaningful bundles.
 ---
 
-# Git Tracking
+# Vault Tracking
 
-Commit changes to git when substantial. Think like merging a PR - meaningful bundles of work.
+Commit notes and vault changes to git when substantial. Works with Obsidian vaults, markdown directories, or any git-tracked notes collection. Think like merging a PR - meaningful bundles of work.
 
 ## When to Use (Proactive)
 

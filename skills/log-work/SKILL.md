@@ -1,5 +1,5 @@
 ---
-name: work-logging
+name: log-work
 description: Log work to daily notes with timestamps. Use proactively after completing tasks, reaching milestones, or finishing research sessions. High signal, no redundancy.
 ---
 
