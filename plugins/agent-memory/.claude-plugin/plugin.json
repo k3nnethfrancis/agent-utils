@@ -1,0 +1,12 @@
+{
+  "name": "agent-memory",
+  "version": "1.0.0",
+  "description": "Persistent memory across context compactions via session dumps, vault search (QMD), and auto-injection. Your agent accumulates knowledge instead of starting fresh.",
+  "author": {
+    "name": "Kenneth Francis",
+    "url": "https://kenneth.computer"
+  },
+  "repository": "https://github.com/k3nnethfrancis/agent-utils",
+  "license": "MIT",
+  "keywords": ["memory", "context", "compaction", "qmd", "vault", "sessions"]
+}

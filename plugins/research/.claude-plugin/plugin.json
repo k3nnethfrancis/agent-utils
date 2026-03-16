@@ -1,0 +1,12 @@
+{
+  "name": "research",
+  "version": "1.0.0",
+  "description": "Research workflow skills — literature review, experiment logging, research note writing, and automated experiment loops (autoresearch).",
+  "author": {
+    "name": "Kenneth Francis",
+    "url": "https://kenneth.computer"
+  },
+  "repository": "https://github.com/k3nnethfrancis/agent-utils",
+  "license": "MIT",
+  "keywords": ["research", "literature-review", "experiments", "autoresearch", "academic"]
+}

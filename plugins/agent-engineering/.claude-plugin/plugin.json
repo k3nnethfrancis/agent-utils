@@ -1,0 +1,12 @@
+{
+  "name": "agent-engineering",
+  "version": "1.0.0",
+  "description": "Agent-assisted development skills — harness design (cybernetics + OpenAI principles), project scaffolding, and open source prep.",
+  "author": {
+    "name": "Kenneth Francis",
+    "url": "https://kenneth.computer"
+  },
+  "repository": "https://github.com/k3nnethfrancis/agent-utils",
+  "license": "MIT",
+  "keywords": ["harness", "cybernetics", "project-setup", "open-source", "agent-development"]
+}

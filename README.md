@@ -2,16 +2,53 @@
 
 My Claude Code setup — hooks, skills, configs, and MCP integrations. Everything here is what I actually run daily.
 
-## Quick Setup
+## Workspace Structure
 
-Clone and install everything:
+Before installing anything, set up the workspace layout everything else builds on. Copy the template `CLAUDE.md` to your workspace root:
+
+```bash
+mkdir -p workspace/{projects,notes/vault/{sessions,logs,projects}}
+cp templates/CLAUDE.md workspace/CLAUDE.md
+touch workspace/notes/vault/{tasks,goals}.md
+```
+
+This gives you:
+- `projects/` — code lives here, each project has its own repo
+- `notes/vault/` — markdown vault with `tasks.md`, `goals.md`, daily notes, session dumps, and per-project planning docs
+- A `CLAUDE.md` that teaches your agent how to navigate it all
+
+See `templates/CLAUDE.md` for the full structure, protocols (progress ledgers, daily notes format, session memory), and setup instructions.
+
+## Plugins & Skills
+
+Clone and install:
 
 ```bash
 git clone https://github.com/k3nnethfrancis/agent-utils.git
 cd agent-utils
 ```
 
-### 1. Hooks (persistent memory across compactions)
+### Option A: Install as Plugins
+
+Pick the pieces you want. Plugins handle all registration automatically — hooks, MCP servers, and skills are discovered and enabled on install.
+
+```bash
+# Memory system (hooks + QMD + context injection)
+claude plugin add ./plugins/agent-memory
+
+# Knowledge management (strategize, vault-tracking, log-work)
+claude plugin add ./plugins/knowledge-mgmt
+
+# Research workflows (lit-review, autoresearch, logging, writing)
+claude plugin add ./plugins/research
+
+# Engineering (harness design, project kickoff, oss prep)
+claude plugin add ./plugins/agent-engineering
+```
+
+### Option B: Manual Setup
+
+#### 1. Hooks (persistent memory across compactions)
 
 ```bash
 cp hooks/*.sh ~/.claude/hooks/
@@ -33,7 +70,7 @@ Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions
 
 **What this does**: Before context compaction, dumps the full conversation to markdown. After compaction, searches your vault via [QMD](https://github.com/tobilu/qmd) and re-injects relevant context. Claude doesn't lose track of what you were working on.
 
-### 2. Skills
+#### 2. Skills
 
 ```bash
 # All skills (user-level)
@@ -68,7 +105,7 @@ cp -r skills/harness-engineering .claude/skills/
 | `project-kickoff` | Consistent project scaffolding with plan.md, resources, architecture docs |
 | `oss-prep` | Prepare a project for open source release |
 
-### 3. Memory (QMD)
+#### 3. Memory (QMD)
 
 Local vault search — BM25, semantic vectors, and hybrid rerank. All local, no API calls. Powers the session-context-inject hook and runs as an MCP server for in-conversation vault queries.
 
@@ -85,7 +122,7 @@ claude mcp add qmd -- qmd mcp
 
 See `memory/README.md` for full setup including auto-indexing via git hooks.
 
-### 4. MCP Integrations
+#### 4. MCP Integrations
 
 Setup guides in `mcps/` — each README has the exact install command and what keys/auth the user needs to provide.
 
@@ -97,7 +134,7 @@ Setup guides in `mcps/` — each README has the exact install command and what k
 
 Read each `mcps/*/README.md` for auth setup details.
 
-### 5. Statusline
+#### 5. Statusline
 
 ```bash
 cp configs/statusline.sh ~/.claude/configs/statusline.sh
@@ -123,9 +160,9 @@ The skills layer on top — `strategize` pulls from your vault + connected MCPs 
 
 The MCPs connect external sources — meeting notes from Granola, tasks from Linear, docs from Notion. More sources = richer context for planning and research skills.
 
-## Reference Projects
+## Reference Projects (Optional)
 
-Included as git submodules under `reference/`:
+Included as git submodules under `reference/`. These are not required for any functionality — just useful reading.
 
 - **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)**
 - **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)**
