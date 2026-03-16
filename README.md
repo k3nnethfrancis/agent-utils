@@ -24,6 +24,7 @@ Claude Code skills (SKILL.md format) — drop into your `.claude/skills/` direct
 - **`strategize`** — Strategic thinking mode for direction, trade-offs, and priorities across projects
 
 **Workflow:**
+- **`harness-engineering`** — Design agent environments using cybernetic control theory (Ashby, Beer, Bateson) + OpenAI's harness engineering principles. Diagnostic framework for when agents produce bad output.
 - **`plan-interview`** — Stress-test a plan through structured one-question-at-a-time interrogation
 - **`project-kickoff`** — Consistent project scaffolding with agent-efficient structure
 - **`git-tracking`** — Smart commit bundling (think PR-sized, not edit-sized)
