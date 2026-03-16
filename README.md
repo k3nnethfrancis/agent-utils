@@ -2,7 +2,7 @@
 
 Hooks, skills, configs, and MCP guides for working with Claude Code. Built through daily use — everything here solves a real problem.
 
-**New here?** Read **[WORKFLOW.md](WORKFLOW.md)** for how all the pieces fit together — the vault structure, memory layer, research flow, and why Obsidian.
+Point your agent at this repo and tell it to copy the setup. Pick what you need, ignore the rest.
 
 ## What's Here
 
