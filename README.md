@@ -88,6 +88,7 @@ cp -r skills/harness-engineering .claude/skills/
 | `evolve-context` | Update project docs when reality drifts from plan — syncs CLAUDE.md, plan.md, ledger, README |
 | `vault-tracking` | Commit your notes to git when substantial work accumulates |
 | `log-work` | Timestamped entries in daily notes |
+| `skill-improver` | Mine session logs for skill corrections and failures, propose improvements |
 
 **Research:**
 
