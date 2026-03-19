@@ -17,8 +17,11 @@ Persistent memory across context compactions. Your agent accumulates knowledge i
 
 1. Install QMD:
    ```bash
+   npm install -g @tobilu/qmd
+   # or
    bun install -g @tobilu/qmd
    ```
+   **Note:** If installed via bun, the `qmd` binary must run under Node (not bun) due to `sqlite-vec` native extension path resolution issues with bun's module cache. Edit the launcher script at `~/.bun/bin/qmd` to use `exec node` instead of `exec bun`. If you install via npm, this doesn't apply.
 
 2. Index your vault:
    ```bash

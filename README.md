@@ -19,36 +19,36 @@ This gives you:
 
 See `templates/CLAUDE.md` for the full structure, protocols (progress ledgers, daily notes format, session memory), and setup instructions.
 
-## Plugins & Skills
-
-Clone and install:
+## Install
 
 ```bash
 git clone https://github.com/k3nnethfrancis/agent-utils.git
 cd agent-utils
 ```
 
-### Option A: Install as Plugins
+### 1. Memory Plugin
 
-Pick the pieces you want. Plugins handle all registration automatically — hooks, MCP servers, and skills are discovered and enabled on install.
+The memory system bundles hooks + QMD MCP as a plugin since they work together:
 
 ```bash
-# Memory system (hooks + QMD + context injection)
 claude plugin add ./plugins/agent-memory
-
-# Knowledge management (strategize, vault-tracking, log-work)
-claude plugin add ./plugins/knowledge-mgmt
-
-# Research workflows (lit-review, autoresearch, logging, writing)
-claude plugin add ./plugins/research
-
-# Engineering (harness design, project kickoff, oss prep)
-claude plugin add ./plugins/agent-engineering
 ```
 
-### Option B: Manual Setup
+Or install manually — see `plugins/agent-memory/README.md`.
 
-#### 1. Hooks (persistent memory across compactions)
+### 2. Skills
+
+Copy all skills or cherry-pick:
+
+```bash
+# All skills
+cp -r skills/* ~/.claude/skills/
+
+# Or pick what you need
+cp -r skills/strategize ~/.claude/skills/
+```
+
+### 3. Hooks (if not using plugin)
 
 ```bash
 cp hooks/*.sh ~/.claude/hooks/
@@ -70,15 +70,7 @@ Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions
 
 **What this does**: Before context compaction, dumps the full conversation to markdown. After compaction, searches your vault via [QMD](https://github.com/tobilu/qmd) and re-injects relevant context. Claude doesn't lose track of what you were working on.
 
-#### 2. Skills
-
-```bash
-# All skills (user-level)
-cp -r skills/* ~/.claude/skills/
-
-# Or cherry-pick into a project
-cp -r skills/harness-engineering .claude/skills/
-```
+### Skills Reference
 
 **Knowledge Management:**
 
@@ -107,24 +99,7 @@ cp -r skills/harness-engineering .claude/skills/
 | `project-kickoff` | Consistent project scaffolding with plan.md, resources, architecture docs |
 | `oss-prep` | Prepare a project for open source release |
 
-#### 3. Memory (QMD)
-
-Local vault search — BM25, semantic vectors, and hybrid rerank. All local, no API calls. Powers the session-context-inject hook and runs as an MCP server for in-conversation vault queries.
-
-```bash
-bun install -g @tobilu/qmd
-qmd index ~/path/to/your/vault
-```
-
-Register as MCP server:
-
-```bash
-claude mcp add qmd -- qmd mcp
-```
-
-See `memory/README.md` for full setup including auto-indexing via git hooks.
-
-#### 4. MCP Integrations
+### 4. MCP Integrations
 
 Setup guides in `mcps/` — each README has the exact install command and what keys/auth the user needs to provide.
 
@@ -136,7 +111,7 @@ Setup guides in `mcps/` — each README has the exact install command and what k
 
 Read each `mcps/*/README.md` for auth setup details.
 
-#### 5. Statusline
+### 5. Statusline
 
 ```bash
 cp configs/statusline.sh ~/.claude/configs/statusline.sh
