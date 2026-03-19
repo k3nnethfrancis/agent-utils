@@ -129,6 +129,10 @@ If approved, commit. Then discuss: merge to main, or keep branch for further ite
 - Git history (don't rewrite)
 - Core functionality (only generalize interfaces)
 
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ## Output
 
 After completing, summarize:

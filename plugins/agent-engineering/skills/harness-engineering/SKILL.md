@@ -186,6 +186,10 @@ When setting up or auditing a harness:
 - Evaluating whether a codebase is "agent-ready"
 - After reading an agent's output and thinking "this is drifting"
 
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ## Sources
 
 - [OpenAI: Harness Engineering](https://openai.com/index/harness-engineering/) — the 8 rules

@@ -164,6 +164,10 @@ This is the compounding part. Each cycle doesn't just improve a score — it imp
 - `results.tsv` tracks full experiment history
 - `research-log.md` tracks the research narrative
 
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ## When to Use
 
 - You have a question about AI/ML behavior that can be tested empirically

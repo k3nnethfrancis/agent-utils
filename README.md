@@ -85,6 +85,7 @@ cp -r skills/harness-engineering .claude/skills/
 | Skill | What it does |
 |-------|-------------|
 | `strategize` | Orient, plan day/week, think through direction, stress-test plans — pulls from all available context |
+| `evolve-context` | Update project docs when reality drifts from plan — syncs CLAUDE.md, plan.md, ledger, README |
 | `vault-tracking` | Commit your notes to git when substantial work accumulates |
 | `log-work` | Timestamped entries in daily notes |
 

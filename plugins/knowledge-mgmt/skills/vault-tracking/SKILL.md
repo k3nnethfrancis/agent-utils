@@ -68,6 +68,10 @@ Think PR title + description. What did this bundle of work accomplish?
 git commit -m "message"
 ```
 
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ## Principles
 
 - **Meaningful bundles** - think like a PR, not individual edits

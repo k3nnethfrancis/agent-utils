@@ -145,6 +145,10 @@ Each section should stand alone.
 - "What This Means for the Arc"
 - "Key Takeaways"
 
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ### Tone
 
 - First person plural ("we") for collaborative work

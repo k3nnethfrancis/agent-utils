@@ -101,6 +101,26 @@ Include:
 - Quick start commands
 - Link to docs/ for detail
 
+## Context Lifecycle
+
+Kickoff creates the context system. **`evolve-context`** maintains it.
+
+```
+project-kickoff → build → milestone → evolve-context → build → milestone → evolve-context → ...
+```
+
+After kickoff, use `evolve-context` when:
+- A phase completes or the plan changes
+- CLAUDE.md feels stale
+- Before a handoff or after a long gap
+- The user says "update the docs" or "sync context"
+
+The context files created here are designed to be evolved, not written once. The plan will change. The key files list will grow. The architecture will shift. That's normal — the system handles it.
+
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ## Principles
 
 - **CLI first** — validate core logic before adding UI/extensions
@@ -117,3 +137,4 @@ Return to conversation with:
 - Language/dependency decisions made
 - Plan outline (from docs/plan.md)
 - Status: ready to start work
+- Reminder: use `evolve-context` to maintain these files as the project progresses

@@ -67,6 +67,10 @@ cybernetics:
 - **Compression for synthesis**: These get combined into meta-analyses - make them comparable
 - **Analysis lens**: Always assess control-relevant dimensions
 
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ## Additional Resources
 
 ### Reference Files

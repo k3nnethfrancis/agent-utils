@@ -64,6 +64,10 @@ Check for `YYYY-MM-DD.md` in your notes directory. Create if missing.
 
 Add the log entry with timestamp, description, tags, and details.
 
+## Gotchas
+
+_Empty — add failure modes here as they're discovered in real use._
+
 ## Principles
 
 - **Timestamps required** - always use `date` command, never assume
