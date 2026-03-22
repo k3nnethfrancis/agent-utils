@@ -1,6 +1,6 @@
 # Reference Projects
 
-Other skills repos I recommend pointing your agents at. These complement what's in agent-utils — between them you get broad coverage of context engineering, agent workflows, and Claude Code patterns.
+Other repos I use. Optionally point your agents here as well to complement what's in agent-utils in various ways you need for your work.
 
 | Project | What it covers |
 |---------|---------------|
