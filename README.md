@@ -1,23 +1,26 @@
 # agent-utils
 
-My Claude Code setup — hooks, skills, configs, and MCP integrations. Everything here is what I actually run daily.
+A collection of plugins, skills, hooks, and configs that I use daily with Claude Code. Everything here is designed to be easy to point your agents at and install — either all together or à la carte.
 
-## Workspace Structure
+This isn't just a dotfiles repo. It's the scaffolding for how I think about building a personal AI operating system: a workspace where agents can see everything you're working on, remember what happened across sessions, and operate with real context about your projects, research, and goals.
 
-Before installing anything, set up the workspace layout everything else builds on. Copy the template `CLAUDE.md` to your workspace root:
+## The Philosophy
 
-```bash
-mkdir -p workspace/{projects,notes/vault/{sessions,logs,projects}}
-cp templates/CLAUDE.md workspace/CLAUDE.md
-touch workspace/notes/vault/{tasks,goals}.md
+I work from a single folder on my desktop called `lab/`. It has two subdirectories:
+
+```
+lab/
+├── projects/    # every repo lives here
+└── notes/       # markdown vaults (Obsidian)
 ```
 
-This gives you:
-- `projects/` — code lives here, each project has its own repo
-- `notes/vault/` — markdown vault with `tasks.md`, `goals.md`, daily notes, session dumps, and per-project planning docs
-- A `CLAUDE.md` that teaches your agent how to navigate it all
+**`projects/`** is where all code lives. Each project is its own git repo. Agent orchestration happens from the `lab/` root, which gives top-down visibility into everything.
 
-See `templates/CLAUDE.md` for the full structure, protocols (progress ledgers, daily notes format, session memory), and setup instructions.
+**`notes/`** is where thinking happens. I keep one or more markdown vaults here — some public, some private. Daily notes, project planning docs, research working files, task lists, session history. I use [Obsidian](https://obsidian.md) as a frontend, but the file structure is designed for agents first: flat, greppable, cross-referenced with `[[links]]` and `#tags`.
+
+The key insight: **agents work better when they can see your whole workspace**. A `CLAUDE.md` at the root teaches the agent how to navigate the structure — where to find tasks, how to log work, where project docs live, what the research arc is. The vault gives the agent long-term memory. The projects give it things to build.
+
+Everything in this repo — the plugins, skills, hooks, configs — exists to make that loop work: **context in → work done → context preserved → better work next time**.
 
 ## Install
 
@@ -39,6 +42,8 @@ claude plugin install bookmark-research-engine@agent-utils
 | `agent-memory` | Persistent memory across compactions — session dumps, QMD vault search, auto-injection |
 | `bookmark-research-engine` | Turn X bookmarks into ranked research briefs via parallel deep-dive agents |
 
+Both plugins check dependencies on session start and tell you what's missing. No silent failures.
+
 ### Manual install
 
 ```bash
@@ -54,7 +59,7 @@ claude plugin install k3nnethfrancis/bookmark-research-engine
 
 ### Skills (non-plugin)
 
-Copy all skills or cherry-pick:
+Skills are standalone — copy all or cherry-pick:
 
 ```bash
 # All skills
@@ -64,35 +69,48 @@ cp -r skills/* ~/.claude/skills/
 cp -r skills/strategize ~/.claude/skills/
 ```
 
-### 3. Hooks (if not using plugin)
+## Workspace Setup
+
+The workspace template gives you the starting structure. Copy it and adapt to your setup:
 
 ```bash
-cp hooks/*.sh ~/.claude/hooks/
-chmod +x ~/.claude/hooks/*.sh
+mkdir -p lab/{projects,notes/vault/{sessions,logs,projects}}
+cp templates/CLAUDE.md lab/CLAUDE.md
+touch lab/notes/vault/{tasks,goals}.md
 ```
 
-Add to `~/.claude/settings.json` under `"hooks"`:
+This gives you:
+- `projects/` — repos go here, each with its own `CLAUDE.md`
+- `notes/vault/` — markdown vault with `tasks.md`, `goals.md`, daily notes, session dumps, and per-project planning docs
+- A root `CLAUDE.md` that teaches your agent the layout, protocols, and how to navigate
 
-```json
-{
-  "hooks": {
-    "PreCompact": [{ "command": "~/.claude/hooks/pre-compact-dump.sh" }],
-    "SessionStart": [{ "matcher": "compact", "command": "~/.claude/hooks/session-context-inject.sh" }]
-  }
-}
-```
+See `templates/CLAUDE.md` for the full structure, protocols (progress ledgers, daily notes format, session memory), and setup instructions.
 
-Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions`). Works best pointed at a markdown vault — e.g. `export SESSIONS_DIR=~/notes/vault/sessions`. [Obsidian](https://obsidian.md) recommended but any markdown directory works.
+## Plugins
 
-**What this does**: Before context compaction, dumps the full conversation to markdown. After compaction, searches your vault via [QMD](https://github.com/tobilu/qmd) and re-injects relevant context. Claude doesn't lose track of what you were working on.
+### agent-memory
 
-### Skills Reference
+Persistent memory across context compactions. Before Claude compacts, the full conversation is dumped to markdown. After compaction, relevant vault context is searched via [QMD](https://github.com/tobilu/qmd) and re-injected. Your agent accumulates knowledge over time.
+
+Includes: PreCompact hook, SessionStart re-injection hook, QMD MCP server, dependency checker.
+
+See `plugins/agent-memory/README.md` for setup.
+
+### bookmark-research-engine
+
+Turns X bookmarks into ranked, analyzed research briefs. Fetches bookmarks via X's GraphQL API (no external CLI dependencies), enriches links, then uses Claude Code agents in parallel to triage against your research interests and produce structured reports.
+
+Includes: `bre` Python CLI (auto-installed), bookmark-sync skill, arxiv MCP server.
+
+See the [bookmark-research-engine repo](https://github.com/k3nnethfrancis/bookmark-research-engine) for details.
+
+## Skills
 
 **Knowledge Management:**
 
 | Skill | What it does |
 |-------|-------------|
-| `strategize` | Orient, plan day/week, think through direction, stress-test plans — pulls from all available context |
+| `strategize` | Orient, plan day/week, think through direction — pulls from all available context |
 | `evolve-context` | Update project docs when reality drifts from plan — syncs CLAUDE.md, plan.md, ledger, README |
 | `vault-tracking` | Commit your notes to git when substantial work accumulates |
 | `log-work` | Timestamped entries in daily notes |
@@ -102,23 +120,23 @@ Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions
 
 | Skill | What it does |
 |-------|-------------|
-| `lit-review` | Structured paper review with cybernetic analysis rubric |
+| `lit-review` | Structured paper review with analysis rubric |
 | `log-research` | Experiment logging + published research logs |
 | `write-research` | Guidelines for substantive research notes |
-| `autoresearch` | Turn any research question into an automated experiment loop on small models |
+| `autoresearch` | Turn any question into an automated (code → run → score) optimization loop |
 | `bookmark-sync` | Turn X bookmarks into ranked, analyzed research briefs via parallel agents |
 
 **Engineering:**
 
 | Skill | What it does |
 |-------|-------------|
-| `harness-engineering` | Design agent environments using cybernetics + OpenAI's harness principles |
+| `harness-engineering` | Design agent environments using cybernetics + harness engineering principles |
 | `project-kickoff` | Consistent project scaffolding with plan.md, resources, architecture docs |
 | `oss-prep` | Prepare a project for open source release |
 
-### 4. MCP Integrations
+## MCP Integrations
 
-Setup guides in `mcps/` — each README has the exact install command and what keys/auth the user needs to provide.
+Setup guides in `mcps/` — each README has the exact install command and auth setup.
 
 | Service | Install |
 |---------|---------|
@@ -126,20 +144,12 @@ Setup guides in `mcps/` — each README has the exact install command and what k
 | Linear | `claude mcp add linear -- npx -y @linear/linear-mcp` |
 | Granola | `claude mcp add granola --transport http https://mcp.granola.ai/mcp` |
 
-Read each `mcps/*/README.md` for auth setup details.
+## Configs
 
-### 5. Statusline
+### Statusline
 
 ```bash
 cp configs/statusline.sh ~/.claude/configs/statusline.sh
-```
-
-Add to `~/.claude/settings.json`:
-
-```json
-{
-  "statusline": { "command": "~/.claude/configs/statusline.sh" }
-}
 ```
 
 Shows: `[dir] branch (NΔ) | Model | 73%` — the percentage is effective context remaining.
@@ -148,15 +158,15 @@ Shows: `[dir] branch (NΔ) | Model | 73%` — the percentage is effective contex
 
 The core loop: **markdown vault + QMD + hooks = persistent memory**.
 
-You keep a markdown vault (Obsidian recommended) with notes, daily logs, project docs, research. QMD indexes it locally. The hooks dump conversations before compaction and pull relevant vault context back in after. Your agent accumulates knowledge over time instead of starting fresh every session.
+You keep a markdown vault with notes, daily logs, project docs, research. QMD indexes it locally. The hooks dump conversations before compaction and pull relevant vault context back in after. Your agent accumulates knowledge over time instead of starting fresh every session.
 
-The skills layer on top — `strategize` pulls from your vault + connected MCPs to plan the day. `lit-review` writes structured reviews into the vault. `log-research` captures experiment results. Everything feeds back into the searchable vault.
+The skills layer on top — `strategize` pulls from your vault + connected MCPs to plan the day. `lit-review` writes structured reviews into the vault. `autoresearch` runs autonomous experiment loops. Everything feeds back into the searchable vault.
 
 The MCPs connect external sources — meeting notes from Granola, tasks from Linear, docs from Notion. More sources = richer context for planning and research skills.
 
-## Reference Projects (Optional)
+## Reference Projects
 
-Included as git submodules under `reference/`. These are not required for any functionality — just useful reading.
+Included as git submodules under `reference/`. Not required — just useful reading.
 
 - **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)**
 - **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)**
