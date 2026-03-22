@@ -21,22 +21,38 @@ See `templates/CLAUDE.md` for the full structure, protocols (progress ledgers, d
 
 ## Install
 
+### Plugin Marketplace (recommended)
+
+Register the marketplace, then install plugins by name:
+
+```bash
+# Add the marketplace
+claude plugin marketplace add k3nnethfrancis/agent-utils
+
+# Install plugins
+claude plugin install agent-memory@agent-utils
+claude plugin install bookmark-research-engine@agent-utils
+```
+
+| Plugin | What it does |
+|--------|-------------|
+| `agent-memory` | Persistent memory across compactions — session dumps, QMD vault search, auto-injection |
+| `bookmark-research-engine` | Turn X bookmarks into ranked research briefs via parallel deep-dive agents |
+
+### Manual install
+
 ```bash
 git clone https://github.com/k3nnethfrancis/agent-utils.git
 cd agent-utils
-```
 
-### 1. Memory Plugin
-
-The memory system bundles hooks + QMD MCP as a plugin since they work together:
-
-```bash
+# Memory plugin
 claude plugin add ./plugins/agent-memory
+
+# Bookmark plugin (from its own repo)
+claude plugin install k3nnethfrancis/bookmark-research-engine
 ```
 
-Or install manually — see `plugins/agent-memory/README.md`.
-
-### 2. Skills
+### Skills (non-plugin)
 
 Copy all skills or cherry-pick:
 
