@@ -1,15 +1,26 @@
 {
-  "PreCompact": [{
-    "hooks": [{
-      "type": "command",
-      "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pre-compact-dump.sh"
-    }]
-  }],
-  "SessionStart": [{
-    "matcher": "compact",
-    "hooks": [{
-      "type": "command",
-      "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/session-context-inject.sh"
-    }]
-  }]
+  "hooks": {
+    "PreCompact": [{
+      "hooks": [{
+        "type": "command",
+        "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pre-compact-dump.sh"
+      }]
+    }],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [{
+          "type": "command",
+          "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/check-deps.sh"
+        }]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [{
+          "type": "command",
+          "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/session-context-inject.sh"
+        }]
+      }
+    ]
+  }
 }
