@@ -32,8 +32,8 @@ project/
     └── architecture.md # System design (when applicable)
 ```
 
-Some projects also have:
-- `research-log.md` — experiment tracking (analytical, separate from ledger)
+Research projects may also have:
+- `research-log.md` — experiment tracking: question, conditions, results, interpretation. Analytical, separate from ledger. Not needed for engineering projects.
 
 ## Process
 

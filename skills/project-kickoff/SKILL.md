@@ -66,14 +66,14 @@ Add as needed: `scripts/`, `tests/`, `data/`, `outputs/`, `configs/`
 
 **`README.md`** — Status checklist, quick start commands, what this project is. The human-facing overview.
 
-### What About Research Logs?
+### Research Log (research projects only)
 
-For research-heavy projects, add a separate `research-log.md` for experiment tracking (questions, conditions, results, interpretations). This is different from the ledger:
+If the project runs experiments, add `research-log.md` for structured experiment tracking: question, conditions, results, interpretation, confounds, next steps. This is separate from the ledger:
 
 - **Ledger** = operational. "What happened. What's next." Read at session start.
-- **Research log** = analytical. "What experiment. What result. What it means." Read when writing up findings.
+- **Research log** = analytical. "What experiment. What result. What it means." Read when writing up findings or designing the next experiment.
 
-Not every project needs a research log. Engineering projects usually don't. Research projects benefit from having both.
+Engineering projects don't need this. Research projects benefit from having both — the ledger tracks what you built, the research log tracks what you learned.
 
 ## Step 3: Write CLAUDE.md
 
@@ -88,8 +88,8 @@ Include a **read order** at the top — this is the most important thing. Then p
 
 1. `ledger.md`
 2. `docs/plan.md`
-3. `docs/tasks.md` (if it exists)
-4. `docs/resources.md`
+3. `docs/resources.md`
+4. `docs/tasks.md` (if it exists)
 
 ## Project Rules
 
