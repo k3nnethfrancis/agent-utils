@@ -4,7 +4,7 @@ A collection of plugins, MCPs, skills, hooks, and configs that I use with Claude
 
 You can think of this as the scaffolding for a personal AI operating system: a workspace where agents can see everything you're working on, remember what happened across sessions, and operate with real context about your projects, research, and goals.
 
-Since my work revolves around agent design, context engineering, and research, you'll notice the skills and code here lean towards these directions, but I think this will eventually apply to most digital work in the future anyway.
+Since my work revolves around agent design, context engineering, and research, you'll notice the skills and code here lean towards those directions, but I think this will eventually apply to most digital work in the future anyway.
 
 ## The Philosophy
 
