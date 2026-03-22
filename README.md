@@ -193,7 +193,7 @@ Shows: `[dir] branch (NΔ) | Model | 73%` — the percentage is effective contex
 
 ## Reference Projects
 
-Included as git submodules under `reference/`. I pull skills and patterns from these regularly — highly recommended if you're doing serious agent engineering work.
+Other skills repos I recommend pointing your agents at. Included as git submodules under `reference/` — think of this as the approved list of external projects that complement what's here.
 
 - **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)** — comprehensive skill library for context engineering workflows, planning, code review, and more
 - **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)** — deep collection of Claude Code techniques, patterns, and advanced configurations
