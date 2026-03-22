@@ -176,6 +176,7 @@ Setup guides in `mcps/` — each README has the exact install command and auth s
 
 | Service | Install |
 |---------|---------|
+| arxiv | `claude mcp add arxiv -- uvx arxiv-mcp-server` |
 | Notion | `claude mcp add notion -- npx -y @notionhq/notion-mcp-server` |
 | Linear | `claude mcp add linear -- npx -y @linear/linear-mcp` |
 | Granola | `claude mcp add granola --transport http https://mcp.granola.ai/mcp` |
