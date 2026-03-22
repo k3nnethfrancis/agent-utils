@@ -1,8 +1,10 @@
 # agent-utils
 
-A collection of plugins, skills, hooks, and configs that I use daily with Claude Code. Everything here is designed to be easy to point your agents at and install — either all together or à la carte.
+A collection of plugins, MCPs, skills, hooks, and configs that I use with Claude Code. Just point your agent at the URL to copy my setup — either install all together or à la carte.
 
-This isn't just a dotfiles repo. It's the scaffolding for how I think about building a personal AI operating system: a workspace where agents can see everything you're working on, remember what happened across sessions, and operate with real context about your projects, research, and goals.
+You can think of this as the scaffolding for a personal AI operating system: a workspace where agents can see everything you're working on, remember what happened across sessions, and operate with real context about your projects, research, and goals.
+
+Since my work revolves around agent design, context engineering, and research, you'll notice the skills and code here lean towards these directions, but I think this will eventually apply to most digital work in the future anyway.
 
 ## The Philosophy
 
