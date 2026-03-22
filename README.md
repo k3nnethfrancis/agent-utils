@@ -90,6 +90,7 @@ Set `SESSIONS_DIR` to where you want conversation dumps (defaults to `~/sessions
 | `log-research` | Experiment logging + published research logs |
 | `write-research` | Guidelines for substantive research notes |
 | `autoresearch` | Turn any research question into an automated experiment loop on small models |
+| `bookmark-sync` | Turn X bookmarks into ranked, analyzed research briefs via parallel agents |
 
 **Engineering:**
 
