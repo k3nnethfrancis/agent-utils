@@ -168,10 +168,10 @@ The MCPs connect external sources — meeting notes from Granola, tasks from Lin
 
 ## Reference Projects
 
-Included as git submodules under `reference/`. Not required — just useful reading.
+Included as git submodules under `reference/`. I pull skills and patterns from these regularly — highly recommended if you're doing serious agent engineering work.
 
-- **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)**
-- **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)**
+- **[Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)** — comprehensive skill library for context engineering workflows, planning, code review, and more
+- **[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)** — deep collection of Claude Code techniques, patterns, and advanced configurations
 
 ```bash
 git submodule update --init --recursive
