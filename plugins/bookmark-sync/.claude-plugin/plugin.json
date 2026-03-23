@@ -1,0 +1,19 @@
+{
+  "name": "bookmark-sync",
+  "version": "0.1.0",
+  "description": "Turn X bookmarks into ranked, analyzed research briefs via parallel deep-dive agents",
+  "author": {
+    "name": "Kenneth Cavanagh",
+    "url": "https://kenneth.computer"
+  },
+  "repository": "https://github.com/k3nnethfrancis/bookmark-research-engine",
+  "keywords": ["bookmarks", "research", "twitter", "x", "triage", "deep-dive"],
+  "hooks": "./hooks.json",
+  "mcpServers": {
+    "arxiv": {
+      "command": "uvx",
+      "args": ["arxiv-mcp-server"],
+      "description": "Search, download, and read arxiv papers (optional)"
+    }
+  }
+}

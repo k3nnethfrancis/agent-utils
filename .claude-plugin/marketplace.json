@@ -6,23 +6,20 @@
   },
   "metadata": {
     "description": "Claude Code plugins, skills, hooks, and configs for research workflows",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
   },
   "plugins": [
     {
       "name": "agent-memory",
-      "source": "./plugins/agent-memory",
+      "source": "agent-memory",
       "description": "Persistent memory across context compactions via session dumps, vault search (QMD), and auto-injection",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "keywords": ["memory", "context", "compaction", "qmd", "vault", "sessions"]
     },
     {
-      "name": "bookmark-research-engine",
-      "source": {
-        "source": "github",
-        "repo": "k3nnethfrancis/bookmark-research-engine",
-        "ref": "main"
-      },
+      "name": "bookmark-sync",
+      "source": "bookmark-sync",
       "description": "Turn X bookmarks into ranked, analyzed research briefs via parallel deep-dive agents",
       "version": "0.1.0",
       "keywords": ["bookmarks", "research", "twitter", "x", "triage", "deep-dive"]

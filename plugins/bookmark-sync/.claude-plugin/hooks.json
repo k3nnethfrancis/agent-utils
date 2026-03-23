@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v bre >/dev/null 2>&1 || (echo '[bookmark-sync] Installing bre CLI...' && pip install -q git+https://github.com/k3nnethfrancis/bookmark-research-engine.git && echo '[bookmark-sync] bre installed. Run `bre setup` to configure.')"
+          }
+        ]
+      }
+    ]
+  }
+}

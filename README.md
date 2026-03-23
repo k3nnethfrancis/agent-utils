@@ -86,13 +86,13 @@ claude plugin marketplace add k3nnethfrancis/agent-utils
 
 # Install plugins
 claude plugin install agent-memory@agent-utils
-claude plugin install bookmark-research-engine@agent-utils
+claude plugin install bookmark-sync@agent-utils
 ```
 
 | Plugin | What it does |
 |--------|-------------|
 | `agent-memory` | Persistent memory across compactions — session dumps, QMD vault search, auto-injection |
-| `bookmark-research-engine` | Turn X bookmarks into ranked research briefs via parallel deep-dive agents |
+| `bookmark-sync` | Turn X bookmarks into ranked research briefs via parallel deep-dive agents |
 
 Both plugins check dependencies on session start and tell you what's missing. No silent failures.
 
@@ -105,8 +105,8 @@ cd agent-utils
 # Memory plugin
 claude plugin add ./plugins/agent-memory
 
-# Bookmark plugin (from its own repo)
-claude plugin install k3nnethfrancis/bookmark-research-engine
+# Bookmark plugin
+claude plugin add ./plugins/bookmark-sync
 ```
 
 ### Skills (non-plugin)
@@ -131,13 +131,13 @@ Includes: PreCompact hook, SessionStart re-injection hook, QMD MCP server, depen
 
 See `plugins/agent-memory/README.md` for setup.
 
-### bookmark-research-engine
+### bookmark-sync
 
 Turns X bookmarks into ranked, analyzed research briefs. Fetches bookmarks via X's GraphQL API (no external CLI dependencies), enriches links, then uses Claude Code agents in parallel to triage against your research interests and produce structured reports.
 
-Includes: `bre` Python CLI (auto-installed), bookmark-sync skill, arxiv MCP server.
+Includes: bookmark-sync skill, SessionStart hook (auto-installs `bre` Python CLI), arxiv MCP server.
 
-See the [bookmark-research-engine repo](https://github.com/k3nnethfrancis/bookmark-research-engine) for details.
+The Python CLI lives in its own repo: [bookmark-research-engine](https://github.com/k3nnethfrancis/bookmark-research-engine). See `plugins/bookmark-sync/README.md` for setup.
 
 ## Skills
 
@@ -159,7 +159,6 @@ See the [bookmark-research-engine repo](https://github.com/k3nnethfrancis/bookma
 | `log-research` | Experiment logging + published research logs |
 | `write-research` | Guidelines for substantive research notes |
 | `autoresearch` | Turn any question into an automated (code → run → score) optimization loop |
-| `bookmark-sync` | Turn X bookmarks into ranked, analyzed research briefs via parallel agents |
 
 **Engineering:**
 
